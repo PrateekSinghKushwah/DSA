@@ -1,0 +1,10 @@
+class Solution 
+{ 
+    String sort(String s) 
+    {
+        char temp = 0;
+        char chars[] = s.toCharArray();
+        Arrays.sort(chars);
+        return new String(chars);
+    }
+} 
