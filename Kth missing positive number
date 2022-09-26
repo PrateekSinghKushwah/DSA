@@ -1,0 +1,27 @@
+class Solution {
+    public int findKthPositive(int[] arr, int k) {
+        int missing=0;
+        int n = arr.length;
+        int left = 0;
+        int right = n-1;
+        while(left<=right){
+            int mid = left+(right-left)/2;
+            missing = computemissing(arr[mid],mid+1);
+            if(missing>=k){
+                right = mid-1;
+            }
+            else{
+                left = mid+1;
+            }
+        }
+        if(right == -1){
+            return k;
+        }
+        else{
+            return arr[right]+k-computemissing(arr[right],right+1);
+        }
+    }
+    public int computemissing(int currentdata,int actualdata){
+        return currentdata-actualdata;
+    }
+}
