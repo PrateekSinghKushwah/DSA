@@ -1,0 +1,28 @@
+//Using Binary Search//
+class Solution {
+    public int mySqrt(int x) {
+        if(x < 2)
+            return x;
+        
+        long beg = 2, end = x/2+1;
+        
+        while(beg < end){
+            
+            long mid = beg+(end-beg)/2L;
+            
+            if(mid*mid > x)
+                end = mid;
+            else
+                beg = mid+1L;
+        }
+        
+        return (int)(beg-1L);
+    }
+}
+
+//Using Math Library//
+class Solution {
+    public int mySqrt(int x) {
+     return (int)Math.sqrt(x);   
+    }
+}
