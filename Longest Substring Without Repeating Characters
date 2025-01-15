@@ -1,0 +1,49 @@
+Solution-1
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int n = s.length();
+        if (n == 0) return 0; // Handle empty string
+        
+        int left = 0, maxLength = 0;
+        int[] charIndex = new int[128]; // To store the last seen index of each character
+        
+        for (int right = 0; right < n; right++) {
+            char currentChar = s.charAt(right);
+            
+            // If the character is already in the current window, move the left pointer
+            // to the right of the last seen index of the current character.
+            left = Math.max(left, charIndex[currentChar]);
+            
+            // Update the maxLength with the current window size
+            maxLength = Math.max(maxLength, right - left + 1);
+            
+            // Update the last seen index of the current character
+            charIndex[currentChar] = right + 1;
+        }
+        
+        return maxLength;
+    }
+
+Solution-2 
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int n = s.length();
+        if (n == 0) return 0; // Handle empty string
+        
+        int maxLength = 0;
+        int left = 0; // Left pointer of the sliding window
+        HashSet<Character> set = new HashSet<>();
+        
+        for (int right = 0; right < n; right++) {
+            while (set.contains(s.charAt(right))) {
+                set.remove(s.charAt(left));
+                left++; // Shrink the window
+            }
+            set.add(s.charAt(right));
+            maxLength = Math.max(maxLength, right - left + 1);
+        }
+        
+        return maxLength;
+    }
+}
